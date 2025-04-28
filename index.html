@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <div id="caixa-de-algo">
+    <h2></h2>
+    <input type="text" name="pesquisa" id="pesquisa"> <br>
+    <p id="resultados"></p>
+    <select name="Equipe" id="Equipe">
+      <option value="Professor-Curso">Professor-Curso</option>
+      <option value="Coordenadora">Coordenadora</option>
+      <option value="Professor-Medio">Professor-Medio</option>
+      <option value="Tecnico">Tecnico</option>
+    </select> <br>
+    <input type="radio" name="Genero" id="H" class="Genero"> <label for="H">Homem</label><br> 
+    <input type="radio" name="Genero" id="M" class="Genero"> <label for="M">Mulher</label><br> 
+    <input type="radio" name="Genero" id="P" class="Genero"> <label for="P">Personalizado</label><br> 
+    <input type="radio" name="Genero" id="N" class="Genero"> <label for="N">Nenhum</label><br> 
+    <br>
+    <input type="checkbox" name="Grupo" id="DS"> <label for="DS">DS</label><br>
+    <input type="checkbox" name="Grupo" id="ADM"> <label for="ADM">ADM</label><br>
+    <input type="checkbox" name="Grupo" id="Humanas"> <label for="Humanas">Humanas</label><br>
+    <input type="checkbox" name="Grupo" id="Exatas" > <label for="Exatas">Exatas</label><br>
+    <button id="enviar">Enviar</button>
+    <!-- <button type="button" onclick="loadDoc()">Change Content</button> -->
+  </div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<script>
+  $(document).ready(function () {
+    $('#pesquisa').keyup(function () {
+      var nabarra = document.getElementById("pesquisa").value;
+      if (nabarra != '' && nabarra != null) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          document.getElementById("resultados").innerHTML = this.responseText;
+        }
+        xhttp.open("GET", "PHP/pessoas.php?pesquisa=" + nabarra);
+        xhttp.send();
+      }
+      else{
+          document.getElementById("resultados").innerHTML = "";
+      }
+    });
+
+    $('#enviar').click(function () {
+      // var Nome = document.getElementById("pesquisa").value;
+      // var genero = document.getElementsByName("genero");
+      var Grupo = document.getElementsByName("Grupo");
+      // var Equipe = document.getElementById("Equipe").value;
+      alert(Grupo[3].checked);
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+        }
+        xhttp.open("POST", "PHP/cadastro.php?nome="+Nome+"&genero="+genero+"&grupo="+Grupo+"&equipe="+Equipe);
+        xhttp.send();
+    })
+  });
+</script>
+
+</html>
